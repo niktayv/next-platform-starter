@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server';
 
+const PAYLOAD_PATH_PREFIXES = ['/cms', '/cms/api', '/cms/graphql', '/cms/graphql-playground'];
+
 export function middleware(request) {
+  const pathname = request.nextUrl.pathname;
+
+  if (PAYLOAD_PATH_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`))) {
+    return NextResponse.next();
+  }
+
   const response = NextResponse.next();
   
   // Add security headers
@@ -10,8 +18,6 @@ export function middleware(request) {
   
   // Add custom header to track middleware execution
   response.headers.set('X-Middleware-Executed', 'true');
-  
-  const pathname = request.nextUrl.pathname;
   
   // Logging for demonstration (in production, use proper logging service)
   console.log(`[Middleware] ${request.method} ${pathname} - ${new Date().toISOString()}`);
@@ -40,7 +46,8 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.svg (favicon file)
      * - public files (images, etc.)
+     * - cms (Payload-owned routes)
      */
-    '/((?!_next/static|_next/image|favicon.svg|images|.*\\.svg|.*\\.png|.*\\.jpg).*)',
+    '/((?!cms(?:/|$)|_next/static|_next/image|favicon.svg|images|.*\\.svg|.*\\.png|.*\\.jpg).*)',
   ],
 };

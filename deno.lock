@@ -12,19 +12,28 @@
     "packageJson": {
       "dependencies": [
         "npm:@netlify/blobs@^10.7.7",
+        "npm:@netlify/database@1",
+        "npm:@payloadcms/db-postgres@^3.84.1",
+        "npm:@payloadcms/next@^3.84.1",
+        "npm:@payloadcms/plugin-cloud-storage@^3.84.1",
+        "npm:@payloadcms/richtext-lexical@^3.84.1",
         "npm:@tailwindcss/postcss@^4.1.15",
         "npm:babel-plugin-react-compiler@1",
         "npm:blobshape@1",
         "npm:bright@1",
-        "npm:eslint-config-next@^16.0.8",
+        "npm:eslint-config-next@^16.2.6",
         "npm:eslint@9.39.4",
+        "npm:graphql@^16.14.0",
         "npm:markdown-to-jsx@^7.7.16",
         "npm:netlify-cli@^26.0.1",
-        "npm:next@^16.0.8",
+        "npm:next@^16.2.6",
+        "npm:payload@^3.84.1",
         "npm:postcss@^8.4.36",
         "npm:react-dom@19.2.6",
         "npm:react@19.2.6",
+        "npm:sharp@~0.34.5",
         "npm:tailwindcss@^4.1.15",
+        "npm:typescript@^6.0.3",
         "npm:unique-names-generator@^4.7.1"
       ]
     }
