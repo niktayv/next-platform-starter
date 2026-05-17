@@ -62,7 +62,7 @@ Full rules: `~/.codex/LEAN-CTX.md`
 
 - `process.env.CONTEXT` is used as a server-side runtime signal via [utils.js](utils.js). Do not rewrite this to client-only logic without checking the impact on demo pages.
 - `NEXT_PUBLIC_DISABLE_UPLOADS` disables the Blobs upload flow. Keep that guard intact unless the user asks to change upload behavior.
-- `netlify.toml` currently builds with `npm run build` while local development uses `pnpm`. Do not change package-manager wiring casually; treat deploy config changes as intentional operational changes.
+- `netlify.toml` builds with `pnpm build`, matching the repository's `pnpm` workflow.
 - Several examples intentionally demonstrate behavior that only makes sense on Netlify. If something appears broken under plain `next dev`, verify whether it is expected before changing code.
 
 ## Conventions

@@ -4,7 +4,7 @@ This project deploys to Netlify as a Next.js app with an embedded Payload CMS.
 
 Production deploys should normally be triggered by pushing the production branch
 to the Git repository connected to Netlify. In this repository, the Netlify
-build command is defined in `netlify.toml` as `npm run build`, which runs
+build command is defined in `netlify.toml` as `pnpm build`, which runs
 `scripts/build-with-payload.mjs`.
 
 That build script does two important things:
@@ -40,7 +40,7 @@ The repository already defines the build in `netlify.toml`:
 ```toml
 [build]
   publish = ".next"
-  command = "npm run build"
+  command = "pnpm build"
 ```
 
 Do not override this in the Netlify UI unless you intentionally want different
@@ -164,7 +164,7 @@ In Netlify:
 Expected build behavior:
 
 1. Netlify installs dependencies.
-2. Netlify runs `npm run build`.
+2. Netlify runs `pnpm build`.
 3. The build script attempts `payload migrate`.
 4. If migration succeeds, Next.js production build runs.
 5. If migration fails, the deploy fails before going live.
