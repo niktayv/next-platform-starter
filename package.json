@@ -5,19 +5,30 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/build-with-payload.mjs",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint .",
+    "payload": "NODE_OPTIONS=--no-deprecation payload",
+    "payload:generate-importmap": "pnpm payload generate:importmap",
+    "payload:generate-types": "pnpm payload generate:types"
   },
   "dependencies": {
     "@netlify/blobs": "^10.7.7",
+    "@netlify/database": "^1.0.0",
+    "@payloadcms/db-postgres": "^3.84.1",
+    "@payloadcms/next": "^3.84.1",
+    "@payloadcms/plugin-cloud-storage": "^3.84.1",
+    "@payloadcms/richtext-lexical": "^3.84.1",
     "blobshape": "^1.0.0",
     "bright": "^1.0.0",
     "drizzle-orm": "^1.0.0-beta.22",
+    "graphql": "^16.14.0",
     "markdown-to-jsx": "^7.7.16",
-    "next": "^16.0.8",
+    "next": "^16.2.6",
+    "payload": "^3.84.1",
     "react": "19.2.6",
     "react-dom": "19.2.6",
+    "sharp": "^0.34.5",
     "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {
@@ -25,8 +36,10 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "drizzle-kit": "^1.0.0-beta.22",
     "eslint": "9.39.4",
-    "eslint-config-next": "^16.0.8",
+    "eslint-config-next": "^16.2.6",
+    "netlify-cli": "^26.0.1",
     "postcss": "^8.4.36",
-    "tailwindcss": "^4.1.15"
+    "tailwindcss": "^4.1.15",
+    "typescript": "^6.0.3"
   }
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { generateBlob } from 'app/blobs/generator';
+import { generateBlob } from './generator';
 import { ShapeRenderer } from './renderer';
 import { uploadShapeAction } from './actions';
 import { uploadDisabled } from 'utils';
@@ -17,9 +17,14 @@ export function NewShape(props) {
     };
 
     const onUpload = async () => {
-        await uploadShapeAction({ parameters: blobData.parameters });
-        setWasUploaded(true);
-        setLastMutationTime(Date.now());
+        try {
+            await uploadShapeAction({ parameters: blobData.parameters });
+            setWasUploaded(true);
+            setLastMutationTime(Date.now());
+        } catch (error) {
+            console.error('Upload failed:', error);
+            alert('Upload failed. Please try again.');
+        }
     };
 
     return (

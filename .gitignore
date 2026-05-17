@@ -28,6 +28,7 @@ yarn-error.log*
 # local env files
 .env*
 !.env.example
+!.env.*.example
 
 # vercel
 .vercel
@@ -38,3 +39,6 @@ yarn-error.log*
 
 # Local Netlify folder
 .netlify
+
+# Lean-CTX
+.lean-ctx

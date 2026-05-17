@@ -6,16 +6,11 @@ export const metadata = {
 };
 
 const explainer = `
-[Next.js Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) runs before every request is completed, allowing you to modify the request and response. This is useful for adding security headers, logging, authentication, and more.
+This page demonstrates the repo's Next.js middleware in \`middleware.js\`.
 
-This site demonstrates middleware with several features:
-
-- **Security headers**: Every response includes \`X-Frame-Options\`, \`X-Content-Type-Options\`, and \`Referrer-Policy\` headers
-- **Request logging**: All requests are logged with timestamp and method
-- **Path protection**: Attempts to access \`/admin\` paths are automatically redirected to the homepage
-- **API versioning**: API routes receive an \`X-API-Version\` header
-
-Try accessing \`/admin\` to see the redirect in action. Check your browser's network inspector to see the security headers on this page's response.
+The middleware logs requests, applies a few response headers, adds an API
+version header for API routes, and redirects \`/admin\` traffic back to the
+homepage.
 `;
 
 const codeSnippet = `
@@ -24,22 +19,29 @@ const codeSnippet = `
 import { NextResponse } from 'next/server';
 
 export function middleware(request) {
+  console.log(\`[\${new Date().toISOString()}] \${request.method} \${request.nextUrl.pathname}\`);
+
   const response = NextResponse.next();
-  
+
   // Add security headers
   response.headers.set('X-Frame-Options', 'DENY');
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-  
+
   const pathname = request.nextUrl.pathname;
-  
+
+  // Add API versioning header
+  if (pathname.startsWith('/api')) {
+    response.headers.set('X-API-Version', '1.0');
+  }
+
   // Block access to /admin paths
   if (pathname.startsWith('/admin')) {
     const url = request.nextUrl.clone();
     url.pathname = '/';
     return NextResponse.redirect(url);
   }
-  
+
   return response;
 }
 ~~~

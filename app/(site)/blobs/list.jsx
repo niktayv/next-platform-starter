@@ -13,13 +13,21 @@ export function StoredBlobsList({ lastMutationTime }) {
         console.log('Fetching keys...');
         listShapesAction().then((response) => {
             setKeys(response);
+        }).catch((error) => {
+            console.error('Failed to fetch keys:', error);
+            setKeys([]);
         });
     }, [lastMutationTime]);
 
     const onSelect = async (keyName) => {
         setSelectedKey(keyName);
-        const data = await getShapeAction({ keyName });
-        setPreviewData(data);
+        try {
+            const data = await getShapeAction({ keyName });
+            setPreviewData(data);
+        } catch (error) {
+            console.error('Failed to fetch shape:', error);
+            setPreviewData(null);
+        }
     };
 
     return (
