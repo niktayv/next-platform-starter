@@ -17,6 +17,17 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 const databaseURL = resolveDatabaseConnectionString();
+const getPayloadSecret = () => {
+  if (process.env.PAYLOAD_SECRET) {
+    return process.env.PAYLOAD_SECRET;
+  }
+
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('PAYLOAD_SECRET must be set in production.');
+  }
+
+  return 'payload-local-development-secret';
+};
 
 export default buildConfig({
   admin: {
@@ -30,12 +41,12 @@ export default buildConfig({
   db: postgresAdapter({
     migrationDir: path.resolve(dirname, 'payload/migrations'),
     pool: {
-      connectionString: databaseURL || 'postgres://postgres:postgres@127.0.0.1:5432/payload',
+      connectionString: databaseURL,
     },
   }),
   editor: lexicalEditor(),
   graphQL: {
-    disablePlaygroundInProduction: false,
+    disablePlaygroundInProduction: true,
   },
   plugins: [
     cloudStoragePlugin({
@@ -58,7 +69,7 @@ export default buildConfig({
     graphQL: '/cms/graphql',
     graphQLPlayground: '/cms/graphql-playground',
   },
-  secret: process.env.PAYLOAD_SECRET || 'payload-local-development-secret',
+  secret: getPayloadSecret(),
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

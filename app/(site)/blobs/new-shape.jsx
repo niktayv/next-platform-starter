@@ -17,9 +17,14 @@ export function NewShape(props) {
     };
 
     const onUpload = async () => {
-        await uploadShapeAction({ parameters: blobData.parameters });
-        setWasUploaded(true);
-        setLastMutationTime(Date.now());
+        try {
+            await uploadShapeAction({ parameters: blobData.parameters });
+            setWasUploaded(true);
+            setLastMutationTime(Date.now());
+        } catch (error) {
+            console.error('Upload failed:', error);
+            alert('Upload failed. Please try again.');
+        }
     };
 
     return (

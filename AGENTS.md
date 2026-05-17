@@ -48,19 +48,19 @@ Full rules: `~/.codex/LEAN-CTX.md`
 
 ## Important Feature Surfaces
 
-- Homepage: [app/page.jsx](/home/yuri/Projects/Business/Weekends.nz/6Code/next-platform-starter/app/page.jsx) shows the runtime-context demo and random quote client fetch flow.
-- Random quote API: [app/quotes/random/route.js](/home/yuri/Projects/Business/Weekends.nz/6Code/next-platform-starter/app/quotes/random/route.js) is the main route-handler example.
-- Blobs demo: [app/blobs/page.jsx](/home/yuri/Projects/Business/Weekends.nz/6Code/next-platform-starter/app/blobs/page.jsx) and [app/blobs/actions.js](/home/yuri/Projects/Business/Weekends.nz/6Code/next-platform-starter/app/blobs/actions.js) are the main `@netlify/blobs` integration surface.
-- Edge Function demo: [netlify/edge-functions/rewrite.js](/home/yuri/Projects/Business/Weekends.nz/6Code/next-platform-starter/netlify/edge-functions/rewrite.js) drives `/edge`.
-- Middleware demo: [middleware.js](/home/yuri/Projects/Business/Weekends.nz/6Code/next-platform-starter/middleware.js) sets headers, logs requests, and redirects `/admin`.
-- Revalidation demo: [app/revalidation/page.jsx](/home/yuri/Projects/Business/Weekends.nz/6Code/next-platform-starter/app/revalidation/page.jsx) demonstrates tagged fetch caching and `revalidateTag`.
-- Image CDN demo: [app/image-cdn/page.jsx](/home/yuri/Projects/Business/Weekends.nz/6Code/next-platform-starter/app/image-cdn/page.jsx) demonstrates `next/image` plus explicit `/.netlify/images` usage.
-- Routing demo: [app/routing/page.jsx](/home/yuri/Projects/Business/Weekends.nz/6Code/next-platform-starter/app/routing/page.jsx) reflects rules declared in [next.config.js](/home/yuri/Projects/Business/Weekends.nz/6Code/next-platform-starter/next.config.js).
-- Form handling demo: [components/feedback-form.jsx](/home/yuri/Projects/Business/Weekends.nz/6Code/next-platform-starter/components/feedback-form.jsx) depends on [public/__forms.html](/home/yuri/Projects/Business/Weekends.nz/6Code/next-platform-starter/public/__forms.html).
+- Homepage: [app/page.jsx](app/page.jsx) shows the runtime-context demo and random quote client fetch flow.
+- Random quote API: [app/quotes/random/route.js](app/quotes/random/route.js) is the main route-handler example.
+- Blobs demo: [app/blobs/page.jsx](app/blobs/page.jsx) and [app/blobs/actions.js](app/blobs/actions.js) are the main `@netlify/blobs` integration surface.
+- Edge Function demo: [netlify/edge-functions/rewrite.js](netlify/edge-functions/rewrite.js) drives `/edge`.
+- Middleware demo: [middleware.js](middleware.js) sets headers, logs requests, and redirects `/admin`.
+- Revalidation demo: [app/revalidation/page.jsx](app/revalidation/page.jsx) demonstrates tagged fetch caching and `revalidateTag`.
+- Image CDN demo: [app/image-cdn/page.jsx](app/image-cdn/page.jsx) demonstrates `next/image` plus explicit `/.netlify/images` usage.
+- Routing demo: [app/routing/page.jsx](app/routing/page.jsx) reflects rules declared in [next.config.js](next.config.js).
+- Form handling demo: [components/feedback-form.jsx](components/feedback-form.jsx) depends on [public/__forms.html](public/__forms.html).
 
 ## Netlify-Specific Notes
 
-- `process.env.CONTEXT` is used as a server-side runtime signal via [utils.js](/home/yuri/Projects/Business/Weekends.nz/6Code/next-platform-starter/utils.js). Do not rewrite this to client-only logic without checking the impact on demo pages.
+- `process.env.CONTEXT` is used as a server-side runtime signal via [utils.js](utils.js). Do not rewrite this to client-only logic without checking the impact on demo pages.
 - `NEXT_PUBLIC_DISABLE_UPLOADS` disables the Blobs upload flow. Keep that guard intact unless the user asks to change upload behavior.
 - `netlify.toml` currently builds with `npm run build` while local development uses `pnpm`. Do not change package-manager wiring casually; treat deploy config changes as intentional operational changes.
 - Several examples intentionally demonstrate behavior that only makes sense on Netlify. If something appears broken under plain `next dev`, verify whether it is expected before changing code.

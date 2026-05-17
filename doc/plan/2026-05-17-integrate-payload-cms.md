@@ -1,4 +1,4 @@
-i# Add Payload CMS to Netlify Starter
+# Add Payload CMS to Netlify Starter
 
 ## Summary
 

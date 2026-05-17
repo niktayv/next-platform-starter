@@ -8,10 +8,10 @@ export const metadata = {
 };
 
 const explainer = `
-[Netlify Blobs](https://docs.netlify.com/blobs/overview/) provides an object store for any kind of data, be it JSON, binary, 
+[Netlify Blobs](https://docs.netlify.com/blobs/overview/) provides an object store for any kind of data, be it JSON, binary,
 or [really](https://mk.gg/projects/chalkstream) anything else ([really!](https://mk.gg/projects/turbofan)). In this example, the blob store is used to **hold the data of user-generated random blobby shapes**.
 
-Using the blob store is basically zero-config. Below is a Next.js Server Action to upload data (see \`app/blobs/actions.js\`). 
+Using the blob store is basically zero-config. Below is a Next.js Server Action to upload data (see \`app/blobs/actions.js\`).
 When deployed to Netlify, the Server Action is run by serverless functions, and all context required for the blob service is set-up automatically.
 
 ~~~js
@@ -21,7 +21,7 @@ import { getStore } from '@netlify/blobs';
 // TODO: Always be sanitizing data in real sites!
 export async function uploadShape({ shapeData }) {
     const blobStore = getStore('shapes');
-    const key = data.name;
+    const key = shapeData.name;
     await blobStore.setJSON(key, shapeData);
 }
 ~~~
@@ -31,7 +31,7 @@ Choose any existing object to view it.
 `;
 
 const uploadDisabledText = `
-User uploads are disabled in this site. To run your own and try it out: 
+User uploads are disabled in this site. To run your own and try it out:
 <a href="https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-platform-starter">
 <img src="https://www.netlify.com/img/deploy/button.svg" style="display: inline;" alt="Deploy to Netlify" />
 </a>

@@ -10,10 +10,17 @@ const databaseURL = resolveDatabaseConnectionString();
 if (databaseURL) {
   env.DATABASE_URL = databaseURL;
 
-  execFileSync('pnpm', ['payload', 'migrate'], {
-    env,
-    stdio: 'inherit',
-  });
+  try {
+    execFileSync('pnpm', ['payload', 'migrate'], {
+      env,
+      stdio: 'inherit',
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+
+    console.error(`[payload] Migration failed before Next.js build: ${message}`);
+    throw error;
+  }
 } else {
   console.warn('[payload] Skipping migrations because no database connection is configured.');
 }
